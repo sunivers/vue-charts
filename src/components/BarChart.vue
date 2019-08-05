@@ -1,6 +1,6 @@
 <template>
     <div>
-        <canvas id="barChart" width="400" height="400"></canvas>
+        <canvas ref="barChart" id="barChart" width="400" height="400"></canvas>
     </div>
 </template>
 
@@ -9,7 +9,10 @@ import Chart from 'chart.js';
 
 export default {
     mounted() {
-        var ctx = document.getElementById('barChart');
+        // DOM에 접근할 때, 각 컴포넌트 내 태그에만 접근 가능한 ref 속성을 사용하는 것이 충돌 위험에서 안전하다.
+        var ctx = this.$refs.barChart;
+        // var ctx = document.getElementById('barChart');
+
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
